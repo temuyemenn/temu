@@ -2,272 +2,178 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temu Yemen</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
             margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            color: #333333;
-            padding-bottom: 60px;
+            padding-bottom: 60px; /* For bottom navigation bar */
         }
-        header {
-            background-color: #FF5733;
-            color: white;
-            padding: 10px 20px;
+        .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            direction: rtl;
+            background-color: #FF5733; /* Orange background color */
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .logo {
+        .top-bar .logo {
             display: flex;
             align-items: center;
         }
-        .logo img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+        .top-bar .logo i {
+            font-size: 28px;
+            color: #fff; /* White icon color */
+        }
+        .top-bar .logo span {
             margin-left: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff; /* White text color */
         }
-        .logo h1 {
-            margin: 0;
-            font-size: 1.2em;
+        .top-bar .search-bar {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 20px;
         }
-        .search-bar {
+        .top-bar .search-bar input[type="text"] {
+            width: 100%;
+            max-width: 800px; /* Adjusted size for 4K screens */
+            padding: 7px 20px; /* Larger size */
+            border: none;
+            border-radius: 11px; /* Rounded corners */
+            font-size: 20px; /* Larger font */
+            background-color: #fff; /* White background */
+            color: #FF5733; /* Orange text color */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .top-bar .search-bar input[type="text"]::placeholder {
+            color: #FF5733; /* Orange placeholder text color */
+        }
+        .top-bar .search-bar input[type="text"]:focus {
+            outline: none;
+        }
+        .top-bar .icons {
             display: flex;
             align-items: center;
-            position: relative;
-            width: 40%;
         }
-        .search-bar input {
-            width: 100%;
-            padding: 5px 10px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
+        .top-bar .icons div {
+            margin-left: 20px;
         }
-        .search-bar i {
-            position: absolute;
-            right: 10px;
-        }
-        .cart-icon {
-            font-size: 1.2em;
-            position: relative;
+        .top-bar .icons i {
+            font-size: 24px;
+            color: #fff;
             cursor: pointer;
         }
-        .cart-icon .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
+        .top-bar .cart-count {
+            position: relative;
+            top: -10px;
+            right: -10px;
             background-color: red;
             color: white;
+            font-size: 14px;
+            padding: 5px 8px;
             border-radius: 50%;
-            padding: 2px 5px;
-            font-size: 0.7em;
         }
         nav {
-            display: flex;
-            justify-content: flex-start;
             background-color: #FF7043;
-            padding: 10px 0;
+            padding: 10px;
+            display: flex;
             overflow-x: auto;
-            white-space: nowrap;
         }
         nav a {
-            color: white;
-            padding: 10px 15px;
+            color: #fff;
             text-decoration: none;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            margin: 0 5px;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
         }
-        nav a:hover {
-            background-color: #FFDAB9;
-            color: black;
-            transform: scale(1.1);
+        nav a i {
+            margin-left: 5px;
         }
         .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
+            padding: 20px;
         }
         .banner {
-            background-color: #FF7043;
-            color: white;
+            background-color: #FFC300;
             padding: 10px;
             text-align: center;
-            font-size: 1.1em;
+            margin-bottom: 20px;
         }
-        .banner p {
-            margin: 0;
-        }
-        .section {
-            display: none;
-            background-color: white;
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        .section.active {
-            display: block;
-        }
-        .section h2 {
-            margin-top: 0;
-            color: #FF5733;
-        }
-        .products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .product {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 10px;
-            text-align: center;
-            width: calc(50% - 20px);
-            box-sizing: border-box;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        .product img {
+        .slideshow {
+            position: relative;
             width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-        .product h3 {
-            color: #FF5733;
-            font-size: 1.2em;
-            margin: 10px 0;
-        }
-        .product p {
-            color: #333;
-            font-size: 1em;
-        }
-        .product:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .btn {
-            display: inline-block;
-            padding: 5px 10px;
-            margin-top: 10px;
-            font-size: 11px;
-            color: #fff;
-            background-color: #FF5733;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .btn:hover {
-            background-color: #FF7043;
-        }
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #FF5733;
-            color: white;
-        }
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #FF7043;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        .bottom-nav a {
-            padding: 10px;
-            color: white;
-            text-align: center;
-            flex-grow: 1;
-            font-size: 0.8em;
-            display: inline-block;
-        }
-        .bottom-nav a i {
-            display: block;
-            font-size: 1em;
-            margin-bottom: 5px;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
         }
         .slideshow img {
             width: 100%;
-            height: auto;
             display: none;
         }
         .slideshow img.active {
             display: block;
         }
-        .featured-products {
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .products, .featured-products {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
-            margin-top: 20px;
         }
-        .featured-product {
-            background-color: #f9f9f9;
+        .product, .featured-product {
             border: 1px solid #ddd;
-            border-radius: 10px;
+            border-radius: 5px;
             padding: 10px;
             margin: 10px;
-            text-align: center;
-            width: calc(25% - 20px);
+            flex: 1 1 calc(30% - 40px);
+            box-sizing: border-box;
+            cursor: pointer;
         }
-        .featured-product img {
+        .product img, .featured-product img {
             width: 100%;
             height: auto;
-            border-radius: 10px;
         }
-        .featured-product h3 {
-            color: #FF5733;
-            font-size: 1em;
-            margin: 10px 0;
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            gap: 10px;
+            scroll-behavior: smooth;
         }
-        #cart-details {
-            margin-top: 20px;
+
+        .carousel img {
+            flex: 0 0 auto;
+            width: 80px;
+            height: 80px;
+            margin: 0 5px;
+            border-radius: 50%;
+            animation: slide 30s linear infinite;
         }
-        #product-details {
+
+        @keyframes slide {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        #product-details, #cart-details {
             display: none;
-            padding: 20px;
             border: 1px solid #ddd;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        #product-details img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-        #product-details h3 {
-            color: #FF5733;
-            font-size: 1.5em;
-            margin: 10px 0;
-        }
-        .discount-banner {
-            background-color: #FFEB3B;
-            color: #333;
-            padding: 10px;
-            text-align: center;
-            font-size: 1.1em;
+            border-radius: 5px;
+            padding: 20px;
             margin-top: 20px;
         }
         .cart-item {
@@ -280,254 +186,273 @@
         .cart-item img {
             width: 50px;
             height: auto;
-            border-radius: 5px;
         }
-        .cart-item-details {
-            flex-grow: 1;
-            margin-left: 10px;
-        }
-        .cart-item-details h4 {
-            margin: 0;
-            font-size: 1em;
-        }
-        .cart-item-details p {
-            margin: 5px 0;
-            font-size: 0.9em;
-            color: #555;
-        }
-        .cart-total {
+        .cart-total, .cart-share {
+            text-align: center;
             margin-top: 20px;
-            font-size: 1.2em;
-            text-align: right;
         }
-        .cart-discount {
-            margin-top: 10px;
-            font-size: 1em;
-            text-align: right;
-            color: green;
+        .btn {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #FF5733;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
         }
-        .cart-final-total {
-            margin-top: 5px;
-            font-size: 1.3em;
-            text-align: right;
-            font-weight: bold;
+        .cart-share a:hover {
+            background-color: #FF7043;
+        }
+        .size-options button {
+            margin: 5px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        .size-options button.active {
+            background-color: #FF5733;
+            color: #fff;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #FF5733;
+            color: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+        }
+        .bottom-nav a {
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+        .bottom-nav a i {
+            display: block;
+            font-size: 24px;
+        }
+        .bottom-nav a span {
+            display: block;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="images/logo.png" alt="Logo">
-            <h1>Temu Yemen</h1>
-        </div>
-        <div class="search-bar">
-            <input type="text" placeholder="ابحث عن منتجات">
-            <i class="fas fa-search"></i>
-        </div>
-        <div class="cart-icon">
-            <i class="fas fa-shopping-cart"></i>
-            <div class="cart-count">0</div>
+        <div class="top-bar">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>Temu Yemen</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="ابحث عن المنتجات">
+            </div>
+            <div class="customer-service" onclick="showCustomerService()">
+                <i class="fas fa-headset"></i>
+            </div>
+            <div class="cart" onclick="showCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
         </div>
     </header>
     <nav>
-        <a href="#" data-target="men">رجالي</a>
-        <a href="#" data-target="section2">نسائي</a>
-        <a href="#" data-target="section3">أجهزة إلكترونية</a>
-        <a href="#" data-target="section4">مطبخ</a>
-        <a href="#" data-target="section5">منزل وحديقة</a>
-        <a href="#" data-target="section6">منتجات التجميل</a>
+        <a href="#home" onclick="showSection('home')"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+        <a href="#men" onclick="showSection('men')"><i class="fas fa-male"></i>رجال</a>
+        <a href="#women" onclick="showSection('women')"><i class="fas fa-female"></i>نساء</a>
+        <a href="#boys" onclick="showSection('boys')"><i class="fas fa-child"></i>ولادي</a>
+        <a href="#girls" onclick="showSection('girls')"><i class="fas fa-girl"></i>بناتي</a>
+        <a href="#newborn" onclick="showSection('newborn')"><i class="fas fa-baby"></i>مواليد</a>
+        <a href="#accessories" onclick="showSection('accessories')"><i class="fas fa-gem"></i>إكسسوارات</a>
+        <a href="#smartphones" onclick="showSection('smartphones')"><i class="fas fa-mobile-alt"></i>هواتف</a>
+        <a href="#electronics" onclick="showSection('electronics')"><i class="fas fa-plug"></i>إلكترونيات</a>
     </nav>
     <div class="container">
         <div class="banner">
-            <p>مرحبًا بكم في متجر Temu Yemen! استمتعوا بأفضل العروض والتخفيضات.</p>
+            <h2>مرحبًا بكم في تمو اليمن - أفضل متجر للتسوق عبر الإنترنت!</h2>
         </div>
         <div class="slideshow">
-            <img src="images/slide11.jpeg" alt="عرض 1" class="active">
-            <img src="images/slide13.jpeg" alt="عرض 2">
-            <img src="images/slide12.jpeg" alt="عرض 3">
+            <img src="slide1.jpg" alt="Slide 1" class="active">
+            <img src="slide2.jpg" alt="Slide 2">
+            <img src="slide3.jpg" alt="Slide 3">
         </div>
-        <div class="discount-banner">
-            <p>احصل على خصم 20% عند شراء 3 منتجات أو أكثر!</p>
-        </div>
-        <div id="men" class="section active">
-            <h2>رجالي</h2>
+        <div id="home" class="section active">
             <div class="products">
-                <div class="product" onclick="showProductDetails('images/men1.jpeg', 'تي شيرت', 'تي شيرت قطن مريح بألوان متعددة.', 15)">
-                    <img src="images/men2.jpeg" alt="تي شيرت">
-                    <h3>تي شيرت</h3>
-                    <p>15 دولار</p>
+                <div class="product" onclick="showProductDetails('product1')">
+                    <img src="product1.jpg" alt="Product 1">
+                    <h3>منتج 1</h3>
+                    <p>الوصف القصير للمنتج 1</p>
                 </div>
-                <div class="product" onclick="showProductDetails('images/product2.jpg', 'جينز', 'جينز عالي الجودة بألوان متعددة.', 25)">
-                    <img src="images/product2.jpg" alt="جينز">
-                    <h3>جينز</h3>
-                    <p>25 دولار</p>
+                <div class="product" onclick="showProductDetails('product2')">
+                    <img src="product2.jpg" alt="Product 2">
+                    <h3>منتج 2</h3>
+                    <p>الوصف القصير للمنتج 2</p>
                 </div>
+                <div class="product" onclick="showProductDetails('product3')">
+                    <img src="product3.jpg" alt="Product 3">
+                    <h3>منتج 3</h3>
+                    <p>الوصف القصير للمنتج 3</p>
+                </div>
+                <!-- Add more products as needed -->
+            </div>
+            <h2>منتجات مميزة</h2>
+            <div class="carousel">
+                <img src="featured1.jpg" alt="Featured Product 1">
+                <img src="featured2.jpg" alt="Featured Product 2">
+                <img src="featured3.jpg" alt="Featured Product 3">
+                <!-- Add more featured products as needed -->
             </div>
         </div>
-        <div id="section2" class="section">
-            <h2>ملابس نسائية</h2>
-            <div class="products">
-                <div class="product" onclick="showProductDetails('images/product2.jpg', 'هاتف ذكهاتف ذكي بشاشة عالية الدقة وكاميرا متقدمة.', 300)">
-                    <img src="images/product2.jpg" alt="هاتف ذكي">
-                    <h3>فستان قصير</h3>
-                    <p>300 دولار</p>
-                </div>
-                <div class="product" onclick="showProductDetails('images/product4.jpg', 'لابتوب', 'لابتوب بأداء عالي وبطارية تدوم طويلاً.', 700)">
-                    <img src="images/product4.jpg" alt="لابتوب">
-                    <h3>بلوزه</h3>
-                    <p>700 دولار</p>
-                </div>
-            </div>
-        </div>
-        <div id="section3" class="section">
-            <h2>أجهزة إلكترونية</h2>
-            <div class="products">
-                <div class="product" onclick="showProductDetails('images/product3.jpg', 'هاتف ذكي', 'هاتف ذكي بشاشة عالية الدقة وكاميرا متقدمة.', 300)">
-                    <img src="images/product3.jpg" alt="هاتف ذكي">
-                    <h3>هاتف ذكي</h3>
-                    <p>300 دولار</p>
-                </div>
-                <div class="product" onclick="showProductDetails('images/product4.jpg', 'لابتوب', 'لابتوب بأداء عالي وبطارية تدوم طويلاً.', 700)">
-                    <img src="images/product4.jpg" alt="لابتوب">
-                    <h3>لابتوب</h3>
-                    <p>700 دولار</p>
-                </div>
-            </div>
-        </div>
-        <div id="section4" class="section">
-            <h2>مطبخ</h2>
-            <div class="products">
-                <div class="product" onclick="showProductDetails('images/product5.jpg', 'خلاط كهربائي', 'خلاط كهربائي بقوة 1000 واط.', 50)">
-                    <img src="images/product5.jpg" alt="خلاط كهربائي">
-                    <h3>خلاط كهربائي</h3>
-                    <p>50 دولار</p>
-                </div>
-                <div class="product" onclick="showProductDetails('images/product6.jpg', 'ميكروويف', 'ميكروويف سريع وفعال بسعة 20 لتر.', 80)">
-                    <img src="images/product6.jpg" alt="ميكروويف">
-                    <h3>ميكروويف</h3>
-                    <p>80 دولار</p>
-                </div>
-            </div>
-        </div>
-        <div id="section5" class="section">
-            <h2>منزل وحديقة</h2>
-            <div class="products">
-                <div class="product" onclick="showProductDetails('images/product7.jpg', 'كنبة', 'كنبة مريحة وعصرية بألوان متعددة.', 200)">
-                    <img src="images/product7.jpg" alt="كنبة">
-                    <h3>كنبة</h3>
-                    <p>200 دولار</p>
-                </div>
-                <div class="product" onclick="showProductDetails('images/product8.jpg', 'طاولة طعام', 'طاولة طعام خشبية بأناقة فائقة.', 150)">
-                    <img src="images/product8.jpg" alt="طاولة طعام">
-                    <h3>طاولة طعام</h3>
-                    <p>150 دولار</p>
-                </div>
-            </div>
-        </div>
-        <div id="section6" class="section">
-            <h2>منتجات التجميل</h2>
-            <div class="products">
-                <div class="product" onclick="showProductDetails('images/product9.jpg', 'مرطب بشرة', 'مرطب بشرة طبيعي وخفيف.', 10)">
-                    <img src="images/product9.jpg" alt="مرطب بشرة">
-                    <h3>مرطب بشرة</h3>
-                    <p>10 دولار</p>
-                </div>
-                <div class="product" onclick="showProductDetails('images/product10.jpg', 'عطر', 'عطر فرنسي برائحة زهرية منعشة.', 50)">
-                    <img src="images/product10.jpg" alt="عطر">
-                    <h3>عطر</h3>
-                    <p>50 دولار</p>
-                </div>
-            </div>
-        </div>
+        <!-- Add more sections for men, women, etc. -->
         <div id="product-details">
-            <img id="product-image" src="" alt="صورة المنتج">
-            <h3 id="product-name"></h3>
-            <p id="product-description"></p>
-            <p id="product-price"></p>
-            <button class="btn" onclick="addToCart()">أضف إلى السلة</button>
+            <h2>تفاصيل المنتج</h2>
+            <img id="product-image" src="" alt="Product Image">
+            <h3 id="product-name">اسم المنتج</h3>
+            <p id="product-description">وصف المنتج</p>
+            <div class="size-options">
+                <button onclick="selectSize(this)">S</button>
+                <button onclick="selectSize(this)">M</button>
+                <button onclick="selectSize(this)">L</button>
+                <button onclick="selectSize(this)">XL</button>
+            </div>
+            <button class="btn" onclick="addToCart()">إضافة إلى السلة</button>
         </div>
         <div id="cart-details">
-    <h2>سلة المشتريات</h2>
-    <div id="cart-items"></div>
-    <div class="cart-total">المجموع: <span id="cart-total">0</span> دولار</div>
-    <div class="cart-discount" id="cart-discount" style="display: none;">الخصم: <span id="cart-discount-amount">0</span> دولار</div>
-    <div class="cart-final-total" id="cart-final-total" style="display: none;">المجموع النهائي: <span id="cart-final-total-amount">0</span> دولار</div>
-    <button class="btn" onclick="shareCart()">شارك السلة على واتساب</button>
-</div>
-
+            <h2>تفاصيل السلة</h2>
+            <div id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-total">
+                <h3>الإجمالي: $<span id="cart-total">0.00</span></h3>
+            </div>
+            <div class="cart-share">
+                <a href="#" class="btn">مشاركة السلة</a>
+            </div>
+        </div>
     </div>
-    <footer>
-        <p>&copy; 2023 Temu Yemen. جميع الحقوق محفوظة.</p>
-    </footer>
     <div class="bottom-nav">
-        <a href="#" data-target="section1"><i class="fas fa-tshirt"></i><span>ملابس</span></a>
-        <a href="#" data-target="section2"><i class="fas fa-laptop"></i><span>إلكترونيات</span></a>
-        <a href="#" data-target="section3"><i class="fas fa-blender"></i><span>مطبخ</span></a>
-        <a href="#" data-target="section4"><i class="fas fa-couch"></i><span>منزل وحديقة</span></a>
-        <a href="#" data-target="section5"><i class="fas fa-magic"></i><span>تجميل</span></a>
+        <a href="#home" onclick="showSection('home')"><i class="fas fa-home"></i><span>الرئيسية</span></a>
+        <a href="#categories" onclick="showSection('categories')"><i class="fas fa-th-list"></i><span>الأقسام</span></a>
+        <a href="#offers" onclick="showSection('offers')"><i class="fas fa-tags"></i><span>عروض</span></a>
+        <a href="#account" onclick="showSection('account')"><i class="fas fa-user"></i><span>حسابي</span></a>
     </div>
     <script>
-        let cart = [];
-        let cartCountElement = document.querySelector('.cart-count');
-        let cartItemsElement = document.getElementById('cart-items');
-        let cartTotalElement = document.getElementById('cart-total');
-        let cartDiscountElement = document.getElementById('cart-discount');
-        let cartDiscountAmountElement = document.getElementById('cart-discount-amount');
-        let cartFinalTotalElement = document.getElementById('cart-final-total');
-        let cartFinalTotalAmountElement = document.getElementById('cart-final-total-amount');
-        let selectedProduct = {};
+        let cartCount = 0;
 
-        document.querySelectorAll('nav a, .bottom-nav a').forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-                document.getElementById(this.dataset.target).classList.add('active');
-            });
-        });
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
 
-        function showProductDetails(image, name, description, price) {
-            selectedProduct = { image, name, description, price };
-            document.getElementById('product-image').src = image;
-            document.getElementById('product-name').textContent = name;
-            document.getElementById('product-description').textContent = description;
-            document.getElementById('product-price').textContent = `${price} دولار`;
-            document.getElementById('product-details').style.display = 'block';
+        function showProductDetails(productId) {
+            const productDetails = document.getElementById('product-details');
+            const productImage = document.getElementById('product-image');
+            const productName = document.getElementById('product-name');
+            const productDescription = document.getElementById('product-description');
+
+            // Example data - replace with actual product data
+            const productData = {
+                product1: {
+                    image: 'product1.jpg',
+                    name: 'منتج 1',
+                    description: 'وصف مفصل للمنتج 1'
+                },
+                product2: {
+                    image: 'product2.jpg',
+                    name: 'منتج 2',
+                    description: 'وصف مفصل للمنتج 2'
+                },
+                product3: {
+                    image: 'product3.jpg',
+                    name: 'منتج 3',
+                    description: 'وصف مفصل للمنتج 3'
+                }
+            };
+
+            const product = productData[productId];
+            productImage.src = product.image;
+            productName.textContent = product.name;
+            productDescription.textContent = product.description;
+
+            productDetails.style.display = 'block';
         }
 
         function addToCart() {
-            cart.push(selectedProduct);
-            cartCountElement.textContent = cart.length;
-            updateCartDetails();
+            cartCount++;
+            document.getElementById('cart-count').textContent = cartCount;
+
+            const cartItems = document.getElementById('cart-items');
+            const productName = document.getElementById('product-name').textContent;
+            const productImage = document.getElementById('product-image').src;
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <img src="${productImage}" alt="${productName}">
+                <span>${productName}</span>
+                <button onclick="removeFromCart(this)">إزالة</button>
+            `;
+            cartItems.appendChild(cartItem);
+
+            updateCartTotal();
         }
 
-        function updateCartDetails() {
-            cartItemsElement.innerHTML = '';
-            let total = 0;
-            cart.forEach(product => {
-                const item = document.createElement('div');
-                item.className = 'cart-item';
-                item.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                    <p>${product.price} دولار</p>
-                `;
-                cartItemsElement.appendChild(item);
-                total += product.price;
-            });
-            cartTotalElement.textContent = total;
-
-            if (cart.length >= 3) {
-                const discount = total * 0.2;
-                const finalTotal = total - discount;
-                cartDiscountElement.style.display = 'block';
-                cartDiscountAmountElement.textContent = discount.toFixed(2);
-                cartFinalTotalElement.style.display = 'block';
-                cartFinalTotalAmountElement.textContent = finalTotal.toFixed(2);
-            } else {
-                cartDiscountElement.style.display = 'none';
-                cartFinalTotalElement.style.display = 'none';
-            }
+        function removeFromCart(button) {
+            button.parentElement.remove();
+            cartCount--;
+            document.getElementById('cart-count').textContent = cartCount;
+            updateCartTotal();
         }
+
+        function updateCartTotal() {
+            const cartItems = document.querySelectorAll('.cart-item');
+            const cartTotal = document.getElementById('cart-total');
+            const total = cartItems.length * 10.00; // Example calculation
+            cartTotal.textContent = total.toFixed(2);
+        }
+
+        function selectSize(button) {
+            const sizeButtons = document.querySelectorAll('.size-options button');
+            sizeButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        function showCart() {
+            const cartDetails = document.getElementById('cart-details');
+            cartDetails.style.display = 'block';
+        }
+
+        function showCustomerService() {
+            alert('يرجى الاتصال بنا على الرقم: 123-456-7890');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const slideshowImages = document.querySelectorAll('.slideshow img');
+            let currentSlide = 0;
+
+            setInterval(() => {
+                slideshowImages[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slideshowImages.length;
+                slideshowImages[currentSlide].classList.add('active');
+            }, 3000); // Change slide every 3 seconds
+        });
+    </script>
+    <!-- AdSense Code -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 </body>
 </html>
